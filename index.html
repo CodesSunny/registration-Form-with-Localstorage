@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Registration Form </title>
+    <script src="index.js" defer></script>
+</head>
+<body>
+
+    <form>
+        <div class="name-box">
+            <label for="name">Name:</label>
+           <input type="text" id="name" name="uname"/>
+        </div>
+        <div class="email-box">
+            <label for="email">e-mail:</label>
+           <input type="email" id="email" name="email"/>
+        </div>
+        <div class="phone-box">
+            <label for="phone">Phone No:</label>
+           <input type="phone" id="phone" name="phone"/>
+        </div>
+        <div class="btn-box">
+            <button id="submit-btn" type="submit">Save</button>
+            <button id="reset-btn">Reset</button>
+        </div>
+        <button id="clear-btn">Clear All</button>
+    </form>
+    <div id="right-section">  
+            <!-- show display data here  -->
+    </div>
+</body>
+</html>
