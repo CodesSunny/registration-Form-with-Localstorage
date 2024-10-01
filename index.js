@@ -7,30 +7,24 @@ form.addEventListener("submit", (e)=>{
     let name = e.target.uname.value;
     let email = e.target.email.value;
     let phone = e.target.phone.value;
-    let isDuplicate = 0; // keep track of duplicate status
+    let isDuplicate = false; // keep track of duplicate status
     
     // if local storage has data parse it into array otherwise when empty initialize blank array
-    let userData = localStorage.getItem("userDetails")
-    ? JSON.parse(localStorage.getItem("userDetails")) 
-     : [];
+    let userData = JSON.parse(localStorage.getItem("userDetails")) || [];
      
      
      //  define object sturcture to hols user data 
-     let userObject =  {
-         'name': name,
-         'email': email,
-         'phone': phone
-        };
+     let userObject =  {name, email, phone};
     
         // chech duplicate email/phone
         for(let item of userData){
-            if(userObject.email == email || userObject.phone == phone){
-                isDuplicate =1;
+            if(item.email == email || item.phone == phone){
+                isDuplicate = true;
                 break;  // stop loop once found duplicate email/phone
             }   
         }
 
-        if(isDuplicate == 1){
+        if(isDuplicate){
             alert("duplicate email/phone")
         }else{
             // loop array and set input values in array items for new items only
@@ -46,7 +40,8 @@ form.addEventListener("submit", (e)=>{
     })
 
     function displayData(){
-        let userData = JSON.parse(localStorage.getItem("userDetails"));
+        rightSection.innerHTML = ""
+        let userData = JSON.parse(localStorage.getItem("userDetails")) || [];
         userData.forEach((element,i) => {
             
          // set html of dsiplay data
@@ -68,7 +63,6 @@ form.addEventListener("submit", (e)=>{
     let removeItem = (index)=>{
         let userData = JSON.parse(localStorage.getItem("userDetails")); // first get all items array
         userData.splice(index,1); //delete clicked item only
-        console.log(userData);
         localStorage.setItem("userDetails",JSON.stringify(userData)); //update storage with rest data
         displayData(); //display rest data
     }

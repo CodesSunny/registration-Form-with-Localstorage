@@ -7,9 +7,11 @@
 
 body{
     background:rgba(118, 127, 127, 0.047);
+    width: 100%;
+    min-height: 100vh;
     display: flex;
-    gap: 30px;
     align-items: center;
+    justify-content: center;
 }
 
 form{
