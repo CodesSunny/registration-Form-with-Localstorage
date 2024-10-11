@@ -7,7 +7,7 @@ form.addEventListener("submit", (e)=>{
     let name = e.target.uname.value;
     let email = e.target.email.value;
     let phone = e.target.phone.value;
-    let isDuplicate = false; // keep track of duplicate status
+    let isDuplicate = 0; // keep track of duplicate status
     
     // if local storage has data parse it into userData array otherwise if empty, initialize blank array
     let userData = localStorage.getItem("userDetails")
@@ -24,13 +24,13 @@ form.addEventListener("submit", (e)=>{
     
         // check duplicate email/phone
         for(let item of userData){
-            if(item.email == email || item.phone == phone){
-                isDuplicate = true;
+            if(userObject.email == email || userObject.phone == phone){
+                isDuplicate =1;
                 break;  // stop loop once found duplicate email/phone
             }   
         }
 
-        if(isDuplicate){
+        if(isDuplicate == 1){
             alert("duplicate email/phone")
         }else{
             // loop array and set input values in array items for new items only
@@ -46,10 +46,7 @@ form.addEventListener("submit", (e)=>{
     })
 
     function displayData(){
-        rightSection.innerHTML ="";   // Clear the section before displaying new data
-        let userData = localStorage.getItem("userDetails")
-        ? JSON.parse(localStorage.getItem("userDetails")) 
-         : [];
+        let userData = JSON.parse(localStorage.getItem("userDetails"));
 
         userData.forEach((element,i) => {
          // set html of dsiplay data
@@ -72,6 +69,7 @@ form.addEventListener("submit", (e)=>{
     let removeItem = (index)=>{        //rec index
         let userData = JSON.parse(localStorage.getItem("userDetails")); // first get all items array
         userData.splice(index,1); //delete clicked item only
+        console.log(userData);
         localStorage.setItem("userDetails",JSON.stringify(userData)); //update storage with rest data
         displayData(); //display rest data
     }
